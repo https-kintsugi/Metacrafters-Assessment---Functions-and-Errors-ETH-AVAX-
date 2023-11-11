@@ -20,5 +20,7 @@ Once you are on the Remix website, create a new file by clicking on the "+" icon
 
 ## Authors
 John Angelo B. Yap
+
 Far Eastern University - Institute of Technology
+
 BS Computer Science With Specialization in Software Engineering
