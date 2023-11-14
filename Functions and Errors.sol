@@ -1,22 +1,29 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract ExampleContract {
-    uint256 public value;
+contract BankContract {
+    mapping(address => uint256) public balances;
 
-    function setValue(uint256 _newValue) external {
-        // Require
-        require(_newValue != 0, "The value is zero. Try again.");
+    event DepositMade(address indexed account, uint256 amount);
+    event WithdrawalMade(address indexed account, uint256 amount);
 
-        // Assert
-        assert(_newValue > value);
+    function deposit(uint256 amount) public {
+        require(amount > 1, "Deposit should be greater than 1");
+        assert(balances[msg.sender] + amount >= balances[msg.sender]);
 
-        // Revert
-        if (_newValue > 1202) {
-            revert("This exceeds the maximum limit.");
+        balances[msg.sender] += amount;
+        emit DepositMade(msg.sender, amount);
+    }
+
+    function withdraw(uint256 amount) public {
+        require(balances[msg.sender] >= amount, "Insufficient funds");
+        require(balances[msg.sender] - amount <= balances[msg.sender], "Warning: Underflow!");
+
+        if (amount > 100) {
+            revert("You must not exceed 100");
         }
 
-        // If all conditions pass, update the value
-        value = _newValue;
+        balances[msg.sender] -= amount;
+        emit WithdrawalMade(msg.sender, amount);
     }
 }
