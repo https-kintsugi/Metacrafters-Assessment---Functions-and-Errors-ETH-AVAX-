@@ -1,22 +1,50 @@
 # Function And Errors
 The project aims to showcase the student's fundamental understanding of error handling in Solidity programming.
 
-## Description
 
-This code will accept a value that does not equate to zero, is not lower the initial value, or exceed the maximum set value. The purpose is to demonstrate the knowledge of the student in error handling, complete with explanation and code walkthrough, to assess the student's skill in this level of Solidity programming. 
+## Smart Contract Details
 
-## Getting Started
+- *Name:* BankContract
+- *Solidity Version:* ^0.8.0
+- *License:* MIT
 
-### Executing program
+## Contract Functions
 
-To run this program, you can use Remix, an online Solidity IDE. To get started, go to the Remix website at https://remix.ethereum.org/.
+### deposit(uint256 amount)
 
-Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with your name of choice and a .sol extension.
+- *Description:* Allows users to deposit funds into their account.
+- *Parameters:*
+  - amount: The amount to be deposited. Must be greater than 0.
+- *Events:*
+  - DepositMade: Triggered upon a successful deposit, capturing the account address and the deposited amount.
 
-### Executing program
+### withdraw(uint256 amount)
 
-* Compile the program by pressing (ctrl + s) or click the compile button from the top left side of the screen.
-* Deploy the smart contract under the Deploy & Run Transactions tab.
+- *Description:* Allows users to withdraw funds from their account.
+- *Parameters:*
+  - amount: The amount to be withdrawn.
+- *Conditions:*
+  - Requires sufficient funds in the account.
+  - Checks for underflow during withdrawal.
+  - If the withdrawal amount exceeds 100, the transaction is reverted with the message "Withdrawal amount too high."
+- *Events:*
+  - WithdrawalMade: Triggered upon a successful withdrawal, capturing the account address and the withdrawn amount.
+
+## Usage
+
+1. *Deposit Funds:*
+   - Call the deposit function with the desired deposit amount.
+
+   
+   function deposit(uint256 amount) public {...}
+   
+
+2. *Withdraw Funds:*
+   - Call the withdraw function with the desired withdrawal amount.
+
+   
+   function withdraw(uint256 amount) public {...}
+   
 
 ## Authors
 John Angelo B. Yap
